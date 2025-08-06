@@ -141,16 +141,16 @@ class DatabaseManager:
             "message_count": message_count,
             "created_at": user.created_at
         }
-
-    # @staticmethod
-    # def update_user_activity(user_id, is_active=True):
-    #     with get_session() as session:
-    #         user = session.query(User).filter_by(id=user_id).first()
-    #         if user:
-    #             user.is_active = is_active
-    #             user.updated_at = datetime.utcnow()
-    #             logging.info(f"Updated activity for user {user_id}: {is_active}")
-    #         return user
+    @staticmethod
+    def update_user_activity(user_id, is_active=True):
+        with get_session() as session:
+            user = session.query(User).filter_by(id=user_id).first()
+            if user:
+                user.is_active = is_active
+                user.updated_at = datetime.utcnow()
+                logging.info(f"Updated activity for user {user_id}: {is_active}")
+                session.commit()
+            return user
 
 if __name__ == "__main__":
     init_db()
